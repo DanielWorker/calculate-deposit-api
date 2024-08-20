@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
-from app.routers.DepositRouter import DepositRoter
 
+from .routers.DepositRouter import DepositRoter
 
 app = FastAPI()
 

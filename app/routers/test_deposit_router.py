@@ -1,7 +1,7 @@
-from ..main import app
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
+from ..main import app
 
 client = TestClient(app)
 

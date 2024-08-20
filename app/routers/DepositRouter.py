@@ -1,9 +1,11 @@
+from datetime import datetime
+from typing import Dict
+
+from dateutil.relativedelta import relativedelta
 from fastapi import APIRouter, HTTPException
 from pydantic import ValidationError
-from app.schemas.DepositsSchema import DepositSchema
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
-from typing import Dict
+
+from ..schemas.DepositsSchema import DepositSchema
 
 DepositRoter = APIRouter(prefix='/deposits')
 
