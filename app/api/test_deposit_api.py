@@ -1,7 +1,9 @@
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
+from .calculate_deposit import calculate_deposit
 from ..main import app
+from ..schemas.DepositsSchema import DepositSchema
 
 client = TestClient(app)
 
@@ -13,7 +15,7 @@ def test_calculate_deposit_single_month():
         "rate": 5,
         "periods": 1
     }
-    # deposit_data = DepositSchema(amount=1000, date='01.01.2022', rate=5, periods=1)
+
     expected_result = {'01.01.2022': 10041.67}
 
     response = client.post('/deposits/calculate', json=deposit_data)
@@ -50,3 +52,14 @@ def test_calculate_deposit_invalid_date_format():
     except HTTPException as e:
         assert e.status_code == 400
         assert str(e.detail) == "value is not a valid datetime (format '%d.%m.%Y' expected)"
+
+
+def test_calculate_deposit_short_month():
+    deposit_data = DepositSchema(amount=10000, date='31.01.2022', rate=5, periods=3)
+
+    expected_last_date = "31.03.2022"
+    expected_last_amount = 10125.52
+
+    result = calculate_deposit(deposit_data)
+
+    assert result[expected_last_date] == expected_last_amount
