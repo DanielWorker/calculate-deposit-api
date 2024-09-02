@@ -1,9 +1,9 @@
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
-from .calculate_deposit import calculate_deposit
-from ..main import app
-from ..schemas.DepositsSchema import DepositSchema
+from app.api.calculate_deposit import calculate_deposit
+from app.main import app
+from app.schemas.DepositsSchema import DepositSchema
 
 client = TestClient(app)
 

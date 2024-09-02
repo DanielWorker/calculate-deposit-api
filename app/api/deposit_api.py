@@ -1,12 +1,10 @@
-from datetime import datetime
 from typing import Dict
 
-from dateutil.relativedelta import relativedelta
 from fastapi import APIRouter, HTTPException
 from pydantic import ValidationError
 
-from .calculate_deposit import calculate_deposit
-from ..schemas.DepositsSchema import DepositSchema
+from app.api.calculate_deposit import calculate_deposit
+from app.schemas.DepositsSchema import DepositSchema
 
 DepositApi = APIRouter(prefix='/deposits')
 
