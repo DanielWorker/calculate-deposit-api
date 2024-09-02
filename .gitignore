@@ -1,4 +1,5 @@
 htmlcov
-tests
 .coverage
 .idea
+.env
+pgdata
