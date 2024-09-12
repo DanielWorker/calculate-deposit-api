@@ -1,17 +1,8 @@
-import enum
-
 from sqlalchemy import ForeignKey, Float, Enum
 from sqlalchemy.orm import Mapped, mapped_column
 
-from app.model.database import Base, int_pk
-
-
-class AccountType(str, enum.Enum):
-    CURRENT = "current"            # Текущий счет
-    SAVINGS = "savings"            # Накопительный счет
-    FOREIGN_CURRENCY = "foreign_currency"  # Валютный счет
-    FIXED_DEPOSIT = "fixed_deposit"  # Депозитный (срочный) счет
-    INVESTMENT = "investment"      # Инвестиционный счет
+from app.bank_service.schemas import AccountType
+from app.database import Base, int_pk
 
 
 class Account(Base):
@@ -23,10 +14,26 @@ class Account(Base):
 
     def __str__(self):
         return (f"{self.__class__.__name__}(id={self.id}, "
-                f"user_id={self.user_id!r}), "
-                f"type={self.type!r}), "
-                f"balance={self.balance!r}), "
-                f"locked_balance={self.locked_balance!r}")
+                f"user_id={self.user_id!r}, "
+                f"type={self.type!r}, "
+                f"balance={self.balance!r}, "
+                f"locked_balance={self.locked_balance!r})")
 
     def __repr__(self):
         return str(self)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "type": self.type.name,
+            "balance": self.balance,
+            "locked_balance": self.locked_balance
+        }
+
+    def to_basic_dict(self):
+        return {
+            "id": self.id,
+            "type": self.type.name,
+            "balance": self.balance
+        }
