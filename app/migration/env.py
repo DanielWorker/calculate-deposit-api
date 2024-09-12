@@ -10,7 +10,7 @@ from alembic import context
 import sys
 from os.path import dirname, abspath
 
-from app.model.database import DATABASE_URL, Base
+from app.database import DATABASE_URL, Base
 
 from app.model.users import User
 from app.model.accounts import Account

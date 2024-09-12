@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Annotated
 
 from sqlalchemy import func
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncAttrs
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncAttrs, AsyncSession
 from sqlalchemy.orm import DeclarativeBase, declared_attr, Mapped, mapped_column
 
 from app.config import get_db_url
@@ -18,6 +18,11 @@ updated_at = Annotated[datetime, mapped_column(server_default=func.now(), onupda
 str_uniq = Annotated[str, mapped_column(unique=True, nullable=False)]
 str_null_false = Annotated[str, mapped_column(nullable=False)]
 str_null_true = Annotated[str, mapped_column(nullable=True)]
+
+
+async def get_db() -> AsyncSession:
+    async with async_session_maker() as session:
+        yield session
 
 
 class Base(AsyncAttrs, DeclarativeBase):
