@@ -36,6 +36,27 @@ services:
     tty: true
     stdin_open: true
 
+  web:
+    build: .
+    container_name: fastapi_app
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres+asyncpg://admin:12345@postgres:5434/bank_db
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    restart: unless-stopped
+
 volumes:
   pgdata:
     driver: local
