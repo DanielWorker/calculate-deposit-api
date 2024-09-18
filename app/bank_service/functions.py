@@ -11,6 +11,8 @@ from app.bank_service.schemas import DepositSchema, UserCreate, AccountCreate, T
 
 
 class BankFunctions:
+    # TODO: don't use static methods
+
     @staticmethod
     def calculate_deposit(deposit: DepositSchema) -> Dict[str, float]:
         amount = deposit.amount

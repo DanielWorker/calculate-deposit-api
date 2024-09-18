@@ -13,6 +13,10 @@ from app.model.users import User
 
 
 class BankDAO(BaseDAO):
+    # TODO: don't use static methods
+    # Use normal OOP
+
+    # TODO: init class with settings
 
     @staticmethod
     async def create_user(user: UserCreate) -> User:

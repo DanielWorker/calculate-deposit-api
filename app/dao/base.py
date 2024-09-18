@@ -2,7 +2,7 @@ from sqlalchemy import select
 
 from app.database import async_session_maker
 
-
+# TODO: move into bank_service/dao.py
 class BaseDAO:
     @classmethod
     async def find_all(cls, model, **filter_by):

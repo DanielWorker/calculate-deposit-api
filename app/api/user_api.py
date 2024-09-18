@@ -13,6 +13,10 @@ from app.database import get_db
 router = APIRouter(prefix='/users')
 
 
+# TODO: turn into class
+# hint use cbv decorator: 
+# https://fastapi-utils.davidmontague.xyz/user-guide/class-based-views/#the-cbv-decorator
+
 @router.get('/all', response_model=List[UserResponse])
 async def find_all_users_api():
     try:

@@ -19,7 +19,7 @@ str_uniq = Annotated[str, mapped_column(unique=True, nullable=False)]
 str_null_false = Annotated[str, mapped_column(nullable=False)]
 str_null_true = Annotated[str, mapped_column(nullable=True)]
 
-
+# TODO: remove async everywhere
 async def get_db() -> AsyncSession:
     async with async_session_maker() as session:
         yield session

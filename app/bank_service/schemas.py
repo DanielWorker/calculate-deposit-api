@@ -4,6 +4,7 @@ from typing import Optional
 
 from pydantic import BaseModel, Field, field_validator
 
+# TODO: move into model package
 
 class DepositSchema(BaseModel):
     date: str
